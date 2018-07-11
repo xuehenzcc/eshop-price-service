@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zcc.price.mapper.ProductPriceMapper">
+ 
+ <select id="findById" resultType="com.zcc.price.model.ProductPrice">
+ 	select * 
+ 	from t_productprice
+ 	<where>
+ 		<if test="id != null">
+ 			id=#{id}
+ 		</if>
+ 		<if test="productId != null">
+ 			and productId=#{productId}
+ 		</if>
+ 	</where>
+ </select>
+ 
+ <insert id="add" useGeneratedKeys="true" keyProperty="id">
+ 	INSERT INTO t_productprice (value,productId) VALUES (#{value},#{productId})
+ </insert>
+ 
+ <update id="update">
+ 	UPDATE t_productprice SET value=#{value},productId=#{productId} 
+ 	WHERE id=#{id}
+ </update>
+ 
+ <delete id="delete">
+ 	DELETE FROM t_productprice 
+ 	WHERE id=#{id}
+ </delete>
+ 
+</mapper>
